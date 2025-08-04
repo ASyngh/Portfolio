@@ -7,6 +7,8 @@ This is a modern portfolio website built with React and Express.js featuring a s
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Portfolio design preference: Modern, cool-looking design with black, grey, white color palette.
+Project showcase: Dynamic sliding carousel with 3D animations and smooth transitions.
 
 ## System Architecture
 
