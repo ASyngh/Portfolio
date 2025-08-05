@@ -1,3 +1,32 @@
+/* 
+  PORTFOLIO CUSTOMIZATION GUIDE
+  =============================
+  
+  To customize your portfolio, update these sections:
+  
+  1. PROJECTS SECTION (lines ~15-45):
+     - Replace project titles, descriptions, and images
+     - Add your GitHub repository URLs
+     - Update technology tags
+     - Add more projects by copying the structure
+  
+  2. SKILLS SECTION (lines ~45-65):
+     - Update skill names and proficiency levels (0-100)
+     - Organize into categories (frontend, backend, tools)
+  
+  3. HERO SECTION (lines ~230-235):
+     - Change your name and title
+     - Update your tagline/description
+  
+  4. ABOUT SECTION (lines ~254-280):
+     - Write your personal story and experience
+     - Update the statistics/achievements
+  
+  5. CONTACT INFO (search for social media links):
+     - Update your social media profiles
+     - Add/remove contact methods
+*/
+
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -9,59 +38,53 @@ import { ChevronLeft, ChevronRight, Menu, Mail, Phone, MapPin, Github, Linkedin,
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 
+// CUSTOMIZE YOUR PROJECTS HERE
+// Replace with your actual projects - add image/video URLs and GitHub repo links
 const projects = [
   {
     id: 0,
-    title: "E-commerce Platform",
-    description: "Modern React-based online store with payment integration",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-    technologies: ["React", "TypeScript", "Stripe", "Tailwind CSS"]
+    title: "Your Project Name Here",
+    description: "Brief description of what this project does",
+    image: "https://your-project-image-url.com/image.jpg", // Replace with your project image/GIF
+    technologies: ["Tech1", "Tech2", "Tech3"], // Replace with technologies you used
+    githubUrl: "https://github.com/yourusername/your-repo" // Replace with your GitHub repo
   },
   {
     id: 1,
-    title: "Task Management App",
-    description: "Collaborative productivity tool with real-time updates",
-    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-    technologies: ["Next.js", "PostgreSQL", "Socket.io", "Prisma"]
+    title: "Another Project",
+    description: "Description of your second project",
+    image: "https://your-project-image-url.com/image2.jpg",
+    technologies: ["React", "Node.js", "MongoDB"],
+    githubUrl: "https://github.com/yourusername/another-repo"
   },
   {
     id: 2,
-    title: "Creative Portfolio",
-    description: "Responsive portfolio showcasing design and development work",
-    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-    technologies: ["React", "Framer Motion", "Three.js", "GSAP"]
-  },
-  {
-    id: 3,
-    title: "Mobile Banking App",
-    description: "Secure financial app with biometric authentication",
-    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-    technologies: ["React Native", "Node.js", "MongoDB", "Firebase"]
-  },
-  {
-    id: 4,
-    title: "Social Dashboard",
-    description: "Analytics platform for social media management",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-    technologies: ["Vue.js", "D3.js", "Express", "Redis"]
+    title: "Third Project",
+    description: "Description of your third project",
+    image: "https://your-project-image-url.com/image3.jpg",
+    technologies: ["Python", "Flask", "PostgreSQL"],
+    githubUrl: "https://github.com/yourusername/third-repo"
   }
+  // Add more projects by copying the structure above
 ];
 
+// CUSTOMIZE YOUR SKILLS HERE
+// Update with your actual skills and proficiency levels (0-100)
 const skills = {
   frontend: [
-    { name: "React", level: 90 },
-    { name: "TypeScript", level: 85 },
-    { name: "Tailwind CSS", level: 95 }
+    { name: "React", level: 90 }, // Change skill name and level
+    { name: "JavaScript", level: 85 },
+    { name: "HTML/CSS", level: 95 }
   ],
   backend: [
     { name: "Node.js", level: 88 },
     { name: "Python", level: 82 },
-    { name: "PostgreSQL", level: 80 }
+    { name: "Databases", level: 80 }
   ],
   tools: [
     { name: "Git", level: 92 },
-    { name: "Docker", level: 75 },
-    { name: "AWS", level: 78 }
+    { name: "VS Code", level: 95 },
+    { name: "Linux", level: 78 }
   ]
 };
 
@@ -229,12 +252,13 @@ export default function Home() {
         </div>
         
         <div className="text-center z-10 max-w-4xl mx-auto px-6">
+          {/* CUSTOMIZE YOUR HERO SECTION HERE */}
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="block">Creative</span>
+            <span className="block">Your Name</span>
             <span className="block text-zinc-400">Developer</span>
           </h1>
           <p className="text-xl md:text-2xl text-zinc-400 mb-8 max-w-2xl mx-auto">
-            Crafting digital experiences that inspire and engage through innovative design and clean code.
+            Write your catchy tagline here. What do you do? What makes you special?
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button onClick={() => scrollToSection("portfolio")} className="bg-white text-black px-8 py-3 rounded-lg font-semibold hover:bg-zinc-200 transition-colors">
@@ -250,44 +274,36 @@ export default function Home() {
       {/* About Section */}
       <section id="about" className="py-20 bg-zinc-900">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold mb-6">About Me</h2>
-              <p className="text-zinc-400 text-lg mb-6">
-                I'm a passionate full-stack developer with over 5 years of experience creating digital solutions that matter. 
-                My journey began with a love for problem-solving and has evolved into a career dedicated to building 
-                beautiful, functional applications that users love.
-              </p>
-              <p className="text-zinc-400 text-lg mb-8">
-                I specialize in modern web technologies and have a keen eye for design, allowing me to bridge 
-                the gap between technical implementation and user experience.
-              </p>
-              
-              <div className="grid grid-cols-3 gap-6">
-                <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">50+</div>
-                  <div className="text-zinc-400">Projects</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">30+</div>
-                  <div className="text-zinc-400">Clients</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold mb-2">5+</div>
-                  <div className="text-zinc-400">Years</div>
-                </div>
-              </div>
-            </div>
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl font-bold mb-8">About Me</h2>
             
-            <div className="relative">
-              <div className="relative w-full max-w-md mx-auto">
-                <div className="absolute inset-0 border-2 border-white/20 rounded-2xl transform rotate-3"></div>
-                <div className="absolute inset-0 border-2 border-white/10 rounded-2xl transform -rotate-3"></div>
-                <img 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=1000" 
-                  alt="Professional headshot" 
-                  className="w-full rounded-2xl shadow-2xl relative z-10 object-cover h-96"
-                />
+            {/* CUSTOMIZE YOUR ABOUT SECTION HERE */}
+            <p className="text-zinc-400 text-lg mb-6 max-w-3xl mx-auto">
+              Write your personal story here. Talk about your passion for coding, your journey, 
+              what drives you as a developer, and what makes you unique.
+            </p>
+            <p className="text-zinc-400 text-lg mb-12 max-w-3xl mx-auto">
+              Add another paragraph about your specializations, your approach to problem-solving, 
+              or what you love most about development.
+            </p>
+            
+            {/* CUSTOMIZE YOUR STATS HERE */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto">
+              <div className="text-center">
+                <div className="text-3xl font-bold mb-2">10+</div>
+                <div className="text-zinc-400">Projects</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold mb-2">2+</div>
+                <div className="text-zinc-400">Years Experience</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold mb-2">5+</div>
+                <div className="text-zinc-400">Technologies</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold mb-2">100%</div>
+                <div className="text-zinc-400">Dedication</div>
               </div>
             </div>
           </div>
@@ -315,14 +331,30 @@ export default function Home() {
                     className="carousel-item absolute inset-0 flex items-center justify-center"
                     style={position}
                   >
-                    <Card className="bg-zinc-900 border-zinc-800 p-6 w-80 h-64 shadow-2xl">
+                    <Card 
+                      className="bg-zinc-900 border-zinc-800 p-6 w-80 h-64 shadow-2xl cursor-pointer hover:bg-zinc-800 transition-colors group"
+                      onClick={() => window.open(project.githubUrl, '_blank')}
+                    >
                       <img 
                         src={project.image} 
                         alt={project.title}
-                        className="w-full h-32 object-cover rounded-lg mb-4"
+                        className="w-full h-32 object-cover rounded-lg mb-4 group-hover:scale-105 transition-transform"
                       />
-                      <h3 className="text-xl font-semibold mb-2 text-white">{project.title}</h3>
-                      <p className="text-zinc-400 text-sm">{project.description}</p>
+                      <h3 className="text-xl font-semibold mb-2 text-white group-hover:text-zinc-200 flex items-center gap-2">
+                        {project.title}
+                        <Github className="h-4 w-4 opacity-60 group-hover:opacity-100" />
+                      </h3>
+                      <p className="text-zinc-400 text-sm mb-2">{project.description}</p>
+                      <div className="flex flex-wrap gap-1 mt-2">
+                        {project.technologies.map((tech) => (
+                          <span 
+                            key={tech} 
+                            className="text-xs bg-zinc-700 text-zinc-300 px-2 py-1 rounded"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
                     </Card>
                   </div>
                 );
