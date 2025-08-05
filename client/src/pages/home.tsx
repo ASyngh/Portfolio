@@ -35,8 +35,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { ChevronLeft, ChevronRight, Menu, Mail, Phone, MapPin, Github, Linkedin, Twitter } from "lucide-react";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import emailjs from '@emailjs/browser';
 
 // CUSTOMIZE YOUR PROJECTS HERE
 // Replace with your actual projects - add image/video URLs and GitHub repo links
@@ -101,26 +100,13 @@ export default function Home() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
-  const contactMutation = useMutation({
-    mutationFn: async (data: typeof formData) => {
-      const response = await apiRequest("POST", "/api/contact", data);
-      return response.json();
-    },
-    onSuccess: () => {
-      toast({
-        title: "Message sent!",
-        description: "Thank you for reaching out. I'll get back to you soon.",
-      });
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    },
-    onError: () => {
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // EMAILJS CONFIGURATION
+  // Replace these with your actual EmailJS credentials from https://emailjs.com
+  const EMAILJS_SERVICE_ID = "your_service_id";
+  const EMAILJS_TEMPLATE_ID = "your_template_id";
+  const EMAILJS_PUBLIC_KEY = "your_public_key";
 
   const totalItems = projects.length;
 
@@ -190,7 +176,7 @@ export default function Home() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.name || !formData.email || !formData.subject || !formData.message) {
@@ -202,7 +188,39 @@ export default function Home() {
       return;
     }
 
-    contactMutation.mutate(formData);
+    setIsSubmitting(true);
+
+    try {
+      // Send email using EmailJS
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          to_email: "your-email@example.com", // Replace with your email
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+
+      toast({
+        title: "Message sent!",
+        description: "Thank you for reaching out. I'll get back to you soon.",
+      });
+      
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -469,6 +487,7 @@ export default function Home() {
                 Whether you have a question or just want to say hi, feel free to reach out!
               </p>
               
+              {/* CUSTOMIZE YOUR CONTACT INFO HERE */}
               <div className="space-y-4">
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-zinc-800 rounded-lg flex items-center justify-center">
@@ -476,7 +495,7 @@ export default function Home() {
                   </div>
                   <div>
                     <div className="font-semibold">Email</div>
-                    <div className="text-zinc-400">hello@portfolio.com</div>
+                    <div className="text-zinc-400">your-email@example.com</div>
                   </div>
                 </div>
                 
@@ -496,19 +515,23 @@ export default function Home() {
                   </div>
                   <div>
                     <div className="font-semibold">Location</div>
-                    <div className="text-zinc-400">San Francisco, CA</div>
+                    <div className="text-zinc-400">Your City, Country</div>
                   </div>
                 </div>
               </div>
 
+              {/* CUSTOMIZE YOUR SOCIAL MEDIA LINKS HERE */}
               <div className="flex space-x-4 mt-8">
-                <Button variant="ghost" size="icon" className="bg-zinc-800 hover:bg-white hover:text-black rounded-lg">
+                <Button variant="ghost" size="icon" className="bg-zinc-800 hover:bg-white hover:text-black rounded-lg"
+                  onClick={() => window.open('https://github.com/yourusername', '_blank')}>
                   <Github className="h-6 w-6" />
                 </Button>
-                <Button variant="ghost" size="icon" className="bg-zinc-800 hover:bg-white hover:text-black rounded-lg">
+                <Button variant="ghost" size="icon" className="bg-zinc-800 hover:bg-white hover:text-black rounded-lg"
+                  onClick={() => window.open('https://linkedin.com/in/yourusername', '_blank')}>
                   <Linkedin className="h-6 w-6" />
                 </Button>
-                <Button variant="ghost" size="icon" className="bg-zinc-800 hover:bg-white hover:text-black rounded-lg">
+                <Button variant="ghost" size="icon" className="bg-zinc-800 hover:bg-white hover:text-black rounded-lg"
+                  onClick={() => window.open('https://twitter.com/yourusername', '_blank')}>
                   <Twitter className="h-6 w-6" />
                 </Button>
               </div>
@@ -571,9 +594,9 @@ export default function Home() {
                 <Button 
                   type="submit" 
                   className="w-full bg-white text-black py-3 rounded-lg font-semibold hover:bg-zinc-200 transition-colors"
-                  disabled={contactMutation.isPending}
+                  disabled={isSubmitting}
                 >
-                  {contactMutation.isPending ? "Sending..." : "Send Message"}
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </Card>
