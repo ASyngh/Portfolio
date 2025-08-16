@@ -1,0 +1,616 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'dark-primary': '#000000',
+                        'dark-secondary': '#1A1A1A',
+                        'dark-accent': '#333333',
+                        'dark-border': '#2A2A2A',
+                        'text-light': '#CCCCCC',
+                    }
+                }
+            }
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .carousel-item {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+        .gradient-overlay {
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(26,26,26,0.8) 100%);
+        }
+    </style>
+</head>
+<body class="bg-dark-primary text-white font-inter smooth-scroll">
+    
+    <!-- Navigation -->
+    <!-- @COMPONENT: Navigation [fixed header with smooth scroll links] -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-dark-primary/90 backdrop-blur-sm border-b border-dark-border">
+        <div class="max-w-6xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-xl font-bold">Portfolio</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-text-light transition-colors">Home</a>
+                    <a href="#about" class="hover:text-text-light transition-colors">About</a>
+                    <a href="#portfolio" class="hover:text-text-light transition-colors">Portfolio</a>
+                    <a href="#skills" class="hover:text-text-light transition-colors">Skills</a>
+                    <a href="#contact" class="hover:text-text-light transition-colors">Contact</a>
+                </div>
+                <button class="md:hidden text-xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- @END_COMPONENT: Navigation -->
+
+    <!-- Hero Section -->
+    <!-- @COMPONENT: HeroSection [full viewport height with animated text] -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 gradient-overlay"></div>
+        <!-- Modern geometric background pattern -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="w-96 h-96 border border-white/20 rounded-full absolute top-1/4 left-1/4 animate-pulse"></div>
+            <div class="w-64 h-64 border border-white/10 rounded-full absolute bottom-1/4 right-1/4 animate-pulse" style="animation-delay: 1s;"></div>
+        </div>
+        
+        <div class="text-center z-10 max-w-4xl mx-auto px-6">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                <span class="block" data-bind="user.firstName">Creative</span>
+                <span class="block text-text-light" data-bind="user.lastName">Developer</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-text-light mb-8 max-w-2xl mx-auto" data-bind="user.tagline">
+                Crafting digital experiences that inspire and engage through innovative design and clean code.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-white text-dark-primary px-8 py-3 rounded-lg font-semibold hover:bg-text-light transition-colors" data-event="click:scrollToPortfolio">
+                    View My Work
+                </button>
+                <button class="border border-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-dark-primary transition-colors" data-event="click:scrollToContact">
+                    Get In Touch
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: HeroSection -->
+
+    <!-- About Section -->
+    <!-- @COMPONENT: AboutSection [professional background with stats] -->
+    <section id="about" class="py-20 bg-dark-secondary">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6">About Me</h2>
+                    <p class="text-text-light text-lg mb-6" data-bind="user.bio">
+                        I'm a passionate full-stack developer with over 5 years of experience creating digital solutions that matter. 
+                        My journey began with a love for problem-solving and has evolved into a career dedicated to building 
+                        beautiful, functional applications that users love.
+                    </p>
+                    <p class="text-text-light text-lg mb-8">
+                        I specialize in modern web technologies and have a keen eye for design, allowing me to bridge 
+                        the gap between technical implementation and user experience.
+                    </p>
+                    
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold mb-2" data-bind="stats.projects">50+</div>
+                            <div class="text-text-light">Projects</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold mb-2" data-bind="stats.clients">30+</div>
+                            <div class="text-text-light">Clients</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold mb-2" data-bind="stats.experience">5+</div>
+                            <div class="text-text-light">Years</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <!-- Professional headshot with modern frame -->
+                    <div class="relative w-full max-w-md mx-auto">
+                        <!-- Modern geometric frame overlay -->
+                        <div class="absolute inset-0 border-2 border-white/20 rounded-2xl transform rotate-3"></div>
+                        <div class="absolute inset-0 border-2 border-white/10 rounded-2xl transform -rotate-3"></div>
+                        <!-- Professional headshot of a developer in modern office setting -->
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=1000" 
+                             alt="Professional headshot" 
+                             class="w-full rounded-2xl shadow-2xl relative z-10" 
+                             data-mock-image="true" 
+                             data-implementation="Replace with actual professional photo" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: AboutSection -->
+
+    <!-- Portfolio Carousel Section -->
+    <!-- @COMPONENT: PortfolioCarousel [interactive circular carousel with 5 projects] -->
+    <section id="portfolio" class="py-20 bg-dark-primary overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16">Featured Projects</h2>
+            
+            <div class="relative">
+                <!-- Carousel Container -->
+                <div class="relative h-96 flex items-center justify-center">
+                    <!-- Project Cards -->
+                    <!-- @FUNCTIONALITY: Circular carousel with 5 projects, smooth transitions, zoom effects -->
+                    <div id="carousel-container" class="relative w-full h-full">
+                        
+                        <!-- Project 1: E-commerce Platform -->
+                        <div class="carousel-item absolute inset-0 flex items-center justify-center" data-index="0">
+                            <div class="bg-dark-secondary rounded-xl p-6 w-80 h-64 shadow-2xl border border-dark-border">
+                                <!-- Modern e-commerce website design mockup -->
+                                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                                     alt="E-commerce platform project" 
+                                     class="w-full h-32 object-cover rounded-lg mb-4" 
+                                     data-mock="true" />
+                                <h3 class="text-xl font-semibold mb-2" data-bind="projects[0].title">E-commerce Platform</h3>
+                                <p class="text-text-light text-sm" data-bind="projects[0].description">Modern React-based online store with payment integration</p>
+                            </div>
+                        </div>
+
+                        <!-- Project 2: Task Management App -->
+                        <div class="carousel-item absolute inset-0 flex items-center justify-center" data-index="1">
+                            <div class="bg-dark-secondary rounded-xl p-6 w-80 h-64 shadow-2xl border border-dark-border">
+                                <!-- Task management application interface -->
+                                <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                                     alt="Task management app project" 
+                                     class="w-full h-32 object-cover rounded-lg mb-4" 
+                                     data-mock="true" />
+                                <h3 class="text-xl font-semibold mb-2" data-bind="projects[1].title">Task Management App</h3>
+                                <p class="text-text-light text-sm" data-bind="projects[1].description">Collaborative productivity tool with real-time updates</p>
+                            </div>
+                        </div>
+
+                        <!-- Project 3: Portfolio Website -->
+                        <div class="carousel-item absolute inset-0 flex items-center justify-center" data-index="2">
+                            <div class="bg-dark-secondary rounded-xl p-6 w-80 h-64 shadow-2xl border border-dark-border">
+                                <!-- Creative portfolio website design -->
+                                <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                                     alt="Portfolio website project" 
+                                     class="w-full h-32 object-cover rounded-lg mb-4" 
+                                     data-mock="true" />
+                                <h3 class="text-xl font-semibold mb-2" data-bind="projects[2].title">Creative Portfolio</h3>
+                                <p class="text-text-light text-sm" data-bind="projects[2].description">Responsive portfolio showcasing design and development work</p>
+                            </div>
+                        </div>
+
+                        <!-- Project 4: Mobile Banking App -->
+                        <div class="carousel-item absolute inset-0 flex items-center justify-center" data-index="3">
+                            <div class="bg-dark-secondary rounded-xl p-6 w-80 h-64 shadow-2xl border border-dark-border">
+                                <!-- Mobile banking app interface design -->
+                                <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                                     alt="Mobile banking app project" 
+                                     class="w-full h-32 object-cover rounded-lg mb-4" 
+                                     data-mock="true" />
+                                <h3 class="text-xl font-semibold mb-2" data-bind="projects[3].title">Mobile Banking App</h3>
+                                <p class="text-text-light text-sm" data-bind="projects[3].description">Secure financial app with biometric authentication</p>
+                            </div>
+                        </div>
+
+                        <!-- Project 5: Social Media Dashboard -->
+                        <div class="carousel-item absolute inset-0 flex items-center justify-center" data-index="4">
+                            <div class="bg-dark-secondary rounded-xl p-6 w-80 h-64 shadow-2xl border border-dark-border">
+                                <!-- Social media analytics dashboard -->
+                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                                     alt="Social media dashboard project" 
+                                     class="w-full h-32 object-cover rounded-lg mb-4" 
+                                     data-mock="true" />
+                                <h3 class="text-xl font-semibold mb-2" data-bind="projects[4].title">Social Dashboard</h3>
+                                <p class="text-text-light text-sm" data-bind="projects[4].description">Analytics platform for social media management</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Arrows -->
+                    <button id="prev-btn" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-dark-accent hover:bg-white hover:text-dark-primary w-12 h-12 rounded-full flex items-center justify-center transition-colors z-20" 
+                            data-event="click:previousProject">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button id="next-btn" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-dark-accent hover:bg-white hover:text-dark-primary w-12 h-12 rounded-full flex items-center justify-center transition-colors z-20" 
+                            data-event="click:nextProject">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <!-- Project Indicators -->
+                <div class="flex justify-center mt-8 space-x-2">
+                    <!-- @MAP: projects.map((project, index) => ( -->
+                    <button class="w-3 h-3 rounded-full bg-dark-accent hover:bg-white transition-colors carousel-indicator" data-index="0"></button>
+                    <button class="w-3 h-3 rounded-full bg-dark-accent hover:bg-white transition-colors carousel-indicator" data-index="1"></button>
+                    <button class="w-3 h-3 rounded-full bg-white carousel-indicator" data-index="2"></button>
+                    <button class="w-3 h-3 rounded-full bg-dark-accent hover:bg-white transition-colors carousel-indicator" data-index="3"></button>
+                    <button class="w-3 h-3 rounded-full bg-dark-accent hover:bg-white transition-colors carousel-indicator" data-index="4"></button>
+                    <!-- @END_MAP )) -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: PortfolioCarousel -->
+
+    <!-- Skills Section -->
+    <!-- @COMPONENT: SkillsSection [visual skill indicators with progress bars] -->
+    <section id="skills" class="py-20 bg-dark-secondary">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16">Technical Skills</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Frontend Skills -->
+                <div class="bg-dark-primary rounded-xl p-6 border border-dark-border">
+                    <h3 class="text-xl font-semibold mb-6 text-center">Frontend</h3>
+                    <!-- @MAP: frontendSkills.map(skill => ( -->
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-2">
+                            <span data-bind="skill.name">React</span>
+                            <span data-bind="skill.level">90%</span>
+                        </div>
+                        <div class="w-full bg-dark-accent rounded-full h-2">
+                            <div class="bg-white h-2 rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-2">
+                            <span>TypeScript</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="w-full bg-dark-accent rounded-full h-2">
+                            <div class="bg-white h-2 rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-2">
+                            <span>Tailwind CSS</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="w-full bg-dark-accent rounded-full h-2">
+                            <div class="bg-white h-2 rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </div>
+
+                <!-- Backend Skills -->
+                <div class="bg-dark-primary rounded-xl p-6 border border-dark-border">
+                    <h3 class="text-xl font-semibold mb-6 text-center">Backend</h3>
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-2">
+                            <span>Node.js</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="w-full bg-dark-accent rounded-full h-2">
+                            <div class="bg-white h-2 rounded-full" style="width: 88%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-2">
+                            <span>Python</span>
+                            <span>82%</span>
+                        </div>
+                        <div class="w-full bg-dark-accent rounded-full h-2">
+                            <div class="bg-white h-2 rounded-full" style="width: 82%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-2">
+                            <span>PostgreSQL</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="w-full bg-dark-accent rounded-full h-2">
+                            <div class="bg-white h-2 rounded-full" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools & Others -->
+                <div class="bg-dark-primary rounded-xl p-6 border border-dark-border">
+                    <h3 class="text-xl font-semibold mb-6 text-center">Tools & Others</h3>
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-2">
+                            <span>Git</span>
+                            <span>92%</span>
+                        </div>
+                        <div class="w-full bg-dark-accent rounded-full h-2">
+                            <div class="bg-white h-2 rounded-full" style="width: 92%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-2">
+                            <span>Docker</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="w-full bg-dark-accent rounded-full h-2">
+                            <div class="bg-white h-2 rounded-full" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-2">
+                            <span>AWS</span>
+                            <span>78%</span>
+                        </div>
+                        <div class="w-full bg-dark-accent rounded-full h-2">
+                            <div class="bg-white h-2 rounded-full" style="width: 78%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: SkillsSection -->
+
+    <!-- Contact Section -->
+    <!-- @COMPONENT: ContactSection [contact form with validation] -->
+    <section id="contact" class="py-20 bg-dark-primary">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16">Get In Touch</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6">Let's Work Together</h3>
+                    <p class="text-text-light text-lg mb-8">
+                        I'm always interested in new opportunities and exciting projects. 
+                        Whether you have a question or just want to say hi, feel free to reach out!
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-dark-accent rounded-lg flex items-center justify-center">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold">Email</div>
+                                <div class="text-text-light" data-bind="contact.email">hello@portfolio.com</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-dark-accent rounded-lg flex items-center justify-center">
+                                <i class="fas fa-phone text-white"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold">Phone</div>
+                                <div class="text-text-light" data-bind="contact.phone">+1 (555) 123-4567</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-dark-accent rounded-lg flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold">Location</div>
+                                <div class="text-text-light" data-bind="contact.location">San Francisco, CA</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="flex space-x-4 mt-8">
+                        <a href="#" class="w-12 h-12 bg-dark-accent hover:bg-white hover:text-dark-primary rounded-lg flex items-center justify-center transition-colors" data-mock="true">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-dark-accent hover:bg-white hover:text-dark-primary rounded-lg flex items-center justify-center transition-colors" data-mock="true">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-dark-accent hover:bg-white hover:text-dark-primary rounded-lg flex items-center justify-center transition-colors" data-mock="true">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-dark-accent hover:bg-white hover:text-dark-primary rounded-lg flex items-center justify-center transition-colors" data-mock="true">
+                            <i class="fab fa-dribbble"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-dark-secondary rounded-xl p-8 border border-dark-border">
+                    <form data-event="submit:handleContactForm" data-implementation="Should validate and submit contact form">
+                        <div class="mb-6">
+                            <label for="name" class="block text-sm font-semibold mb-2">Name</label>
+                            <input type="text" id="name" name="name" 
+                                   class="w-full bg-dark-primary border border-dark-border rounded-lg px-4 py-3 text-white focus:border-white focus:outline-none transition-colors" 
+                                   placeholder="Your Name" 
+                                   data-mock="true" />
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="email" class="block text-sm font-semibold mb-2">Email</label>
+                            <input type="email" id="email" name="email" 
+                                   class="w-full bg-dark-primary border border-dark-border rounded-lg px-4 py-3 text-white focus:border-white focus:outline-none transition-colors" 
+                                   placeholder="your@email.com" 
+                                   data-mock="true" />
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="subject" class="block text-sm font-semibold mb-2">Subject</label>
+                            <input type="text" id="subject" name="subject" 
+                                   class="w-full bg-dark-primary border border-dark-border rounded-lg px-4 py-3 text-white focus:border-white focus:outline-none transition-colors" 
+                                   placeholder="Project Discussion" 
+                                   data-mock="true" />
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-semibold mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" 
+                                      class="w-full bg-dark-primary border border-dark-border rounded-lg px-4 py-3 text-white focus:border-white focus:outline-none transition-colors resize-none" 
+                                      placeholder="Tell me about your project..." 
+                                      data-mock="true"></textarea>
+                        </div>
+                        
+                        <button type="submit" 
+                                class="w-full bg-white text-dark-primary py-3 rounded-lg font-semibold hover:bg-text-light transition-colors">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: ContactSection -->
+
+    <!-- Footer -->
+    <!-- @COMPONENT: Footer [simple footer with copyright] -->
+    <footer class="py-8 bg-dark-secondary border-t border-dark-border">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <p class="text-text-light">
+                © 2024 Portfolio. All rights reserved. | Built with passion and precision.
+            </p>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <script>
+        (function() {
+            // TODO: Implement business logic, API calls, or state management
+            
+            // Carousel functionality
+            let currentIndex = 2; // Start with middle item (index 2) as active
+            const totalItems = 5;
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            
+            // Initial positioning
+            function updateCarousel() {
+                carouselItems.forEach((item, index) => {
+                    const dataIndex = parseInt(item.getAttribute('data-index'));
+                    let position, scale, opacity, zIndex;
+                    
+                    if (dataIndex === currentIndex) {
+                        // Center item - fully visible and zoomed in
+                        position = 'translate-x-0';
+                        scale = 'scale-110';
+                        opacity = 'opacity-100';
+                        zIndex = 'z-10';
+                    } else if (dataIndex === (currentIndex - 1 + totalItems) % totalItems) {
+                        // Left item - partially visible, zoomed out
+                        position = '-translate-x-64';
+                        scale = 'scale-75';
+                        opacity = 'opacity-60';
+                        zIndex = 'z-5';
+                    } else if (dataIndex === (currentIndex + 1) % totalItems) {
+                        // Right item - partially visible, zoomed out
+                        position = 'translate-x-64';
+                        scale = 'scale-75';
+                        opacity = 'opacity-60';
+                        zIndex = 'z-5';
+                    } else {
+                        // Hidden items - off screen
+                        position = dataIndex < currentIndex ? '-translate-x-96' : 'translate-x-96';
+                        scale = 'scale-50';
+                        opacity = 'opacity-0';
+                        zIndex = 'z-0';
+                    }
+                    
+                    // Apply transforms
+                    item.className = `carousel-item absolute inset-0 flex items-center justify-center transform ${position} ${scale} ${opacity} ${zIndex}`;
+                });
+                
+                // Update indicators
+                indicators.forEach((indicator, index) => {
+                    if (index === currentIndex) {
+                        indicator.className = 'w-3 h-3 rounded-full bg-white transition-colors carousel-indicator';
+                    } else {
+                        indicator.className = 'w-3 h-3 rounded-full bg-dark-accent hover:bg-white transition-colors carousel-indicator';
+                    }
+                });
+            }
+            
+            // Navigation functions
+            function nextProject() {
+                currentIndex = (currentIndex + 1) % totalItems;
+                updateCarousel();
+            }
+            
+            function previousProject() {
+                currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+                updateCarousel();
+            }
+            
+            // Event listeners
+            document.getElementById('next-btn').addEventListener('click', nextProject);
+            document.getElementById('prev-btn').addEventListener('click', previousProject);
+            
+            // Indicator clicks
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateCarousel();
+                });
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    previousProject();
+                } else if (e.key === 'ArrowRight') {
+                    nextProject();
+                }
+            });
+            
+            // Touch/swipe support for mobile
+            let startX = 0;
+            let startY = 0;
+            const carouselContainer = document.getElementById('carousel-container');
+            
+            carouselContainer.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+            });
+            
+            carouselContainer.addEventListener('touchend', (e) => {
+                const endX = e.changedTouches[0].clientX;
+                const endY = e.changedTouches[0].clientY;
+                const diffX = startX - endX;
+                const diffY = startY - endY;
+                
+                // Check if horizontal swipe is dominant
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                    if (diffX > 0) {
+                        nextProject(); // Swipe left
+                    } else {
+                        previousProject(); // Swipe right
+                    }
+                }
+            });
+            
+            // Initialize carousel
+            updateCarousel();
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Auto-advance carousel (optional - can be enabled)
+            // setInterval(nextProject, 5000);
+        })();
+    </script>
+</body>
+</html>

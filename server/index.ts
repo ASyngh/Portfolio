@@ -1,10 +1,21 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import path from "path";
+import { fileURLToPath } from "url";
+
+// Recreate __dirname in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// Serve static files from public
+app.use(express.static(path.join(__dirname, "../public")));
+
+
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -61,11 +72,9 @@ app.use((req, res, next) => {
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
   const port = parseInt(process.env.PORT || '5000', 10);
-  server.listen({
+  server.listen(
     port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
+    "localhost", () => {
     log(`serving on port ${port}`);
   });
 })();

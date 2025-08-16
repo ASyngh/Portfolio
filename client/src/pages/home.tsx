@@ -42,27 +42,27 @@ import emailjs from '@emailjs/browser';
 const projects = [
   {
     id: 0,
-    title: "Your Project Name Here",
-    description: "Brief description of what this project does",
-    image: "https://your-project-image-url.com/image.jpg", // Replace with your project image/GIF
-    technologies: ["Tech1", "Tech2", "Tech3"], // Replace with technologies you used
-    githubUrl: "https://github.com/yourusername/your-repo" // Replace with your GitHub repo
+    title: "Weather App",
+    description: "Tells weather and forecast of your searched location",
+    image: "/images/weather.png", // Replace with your project image/GIF
+    technologies: ["React", "Node", "Express"], // Replace with technologies you used
+    githubUrl: "https://github.com/ASyngh/weather-app" // Replace with your GitHub repo
   },
   {
     id: 1,
-    title: "Another Project",
-    description: "Description of your second project",
-    image: "https://your-project-image-url.com/image2.jpg",
-    technologies: ["React", "Node.js", "MongoDB"],
-    githubUrl: "https://github.com/yourusername/another-repo"
+    title: "Diabetes Predictor",
+    description: "Predicts chances of having diabetes with impressive accuracy.",
+    image: "/images/diabetes.png",
+    technologies: ["Flask", "Scikit"],
+    githubUrl: "https://github.com/ASyngh/Diabetes_Predictor"
   },
   {
     id: 2,
-    title: "Third Project",
-    description: "Description of your third project",
-    image: "https://your-project-image-url.com/image3.jpg",
-    technologies: ["Python", "Flask", "PostgreSQL"],
-    githubUrl: "https://github.com/yourusername/third-repo"
+    title: "Voice Translator",
+    description: "Takes in voice input and returns transcript in selected language.",
+    image: "/images/translator.png",
+    technologies: ["Python", "Flask", "GoogleAPI"],
+    githubUrl: "https://github.com/ASyngh/Voice_Translator"
   }
   // Add more projects by copying the structure above
 ];
@@ -77,13 +77,13 @@ const skills = {
   ],
   backend: [
     { name: "Node.js", level: 88 },
-    { name: "Python", level: 82 },
+    { name: "Flask", level: 82 },
     { name: "Databases", level: 80 }
   ],
   tools: [
-    { name: "Git", level: 92 },
-    { name: "VS Code", level: 95 },
-    { name: "Linux", level: 78 }
+    { name: "Git", level: 70 },
+    { name: "WebStorm", level: 95 },
+    { name: "Pandas", level: 78 }
   ]
 };
 
@@ -92,7 +92,6 @@ export default function Home() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "",
     message: ""
   });
   const [touchStart, setTouchStart] = useState(0);
@@ -104,9 +103,9 @@ export default function Home() {
 
   // EMAILJS CONFIGURATION
   // Replace these with your actual EmailJS credentials from https://emailjs.com
-  const EMAILJS_SERVICE_ID = "your_service_id";
-  const EMAILJS_TEMPLATE_ID = "your_template_id";
-  const EMAILJS_PUBLIC_KEY = "your_public_key";
+  const EMAILJS_SERVICE_ID = "service_6skmkau";
+  const EMAILJS_TEMPLATE_ID = "template_cwsoep3";
+  const EMAILJS_PUBLIC_KEY = "_rS8i-m6SihsKUN8Q";
 
   const totalItems = projects.length;
 
@@ -179,7 +178,7 @@ export default function Home() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+    if (!formData.name || !formData.email || !formData.message ) {
       toast({
         title: "Error",
         description: "Please fill in all fields.",
@@ -198,9 +197,8 @@ export default function Home() {
         {
           from_name: formData.name,
           from_email: formData.email,
-          subject: formData.subject,
           message: formData.message,
-          to_email: "your-email@example.com", // Replace with your email
+          to_email: "1910singhaditya007@gmail.com", // Replace with your email
         },
         EMAILJS_PUBLIC_KEY
       );
@@ -210,7 +208,7 @@ export default function Home() {
         description: "Thank you for reaching out. I'll get back to you soon.",
       });
       
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       console.error('EmailJS error:', error);
       toast({
@@ -246,7 +244,7 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-zinc-800">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <div className="text-xl font-bold">Portfolio</div>
+            <div className="text-xl font-bold">Aditya Singh</div>
             <div className="hidden md:flex space-x-8">
               <button onClick={() => scrollToSection("home")} className="hover:text-zinc-400 transition-colors">Home</button>
               <button onClick={() => scrollToSection("about")} className="hover:text-zinc-400 transition-colors">About</button>
@@ -272,11 +270,11 @@ export default function Home() {
         <div className="text-center z-10 max-w-4xl mx-auto px-6">
           {/* CUSTOMIZE YOUR HERO SECTION HERE */}
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="block">Your Name</span>
+            <span className="block">Aditya Singh</span>
             <span className="block text-zinc-400">Developer</span>
           </h1>
           <p className="text-xl md:text-2xl text-zinc-400 mb-8 max-w-2xl mx-auto">
-            Write your catchy tagline here. What do you do? What makes you special?
+            Transforming ideas into scalable software.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button onClick={() => scrollToSection("portfolio")} className="bg-white text-black px-8 py-3 rounded-lg font-semibold hover:bg-zinc-200 transition-colors">
@@ -297,22 +295,20 @@ export default function Home() {
             
             {/* CUSTOMIZE YOUR ABOUT SECTION HERE */}
             <p className="text-zinc-400 text-lg mb-6 max-w-3xl mx-auto">
-              Write your personal story here. Talk about your passion for coding, your journey, 
-              what drives you as a developer, and what makes you unique.
+              I’m a Computer Science student who got into coding because it was part of the course. Over time, I started enjoying the process of figuring things out and building stuff that works. I don’t have a dramatic story—just a straightforward approach: learn, build, improve.
             </p>
             <p className="text-zinc-400 text-lg mb-12 max-w-3xl mx-auto">
-              Add another paragraph about your specializations, your approach to problem-solving, 
-              or what you love most about development.
+              I mostly work with JavaScript, TypeScript, React, and Node.js, and I’m comfortable with Java, C, and Python too. I use AI tools smartly to stay efficient and solve problems faster. I focus on writing clean, functional code and building things that actually work.
             </p>
             
             {/* CUSTOMIZE YOUR STATS HERE */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto">
               <div className="text-center">
-                <div className="text-3xl font-bold mb-2">10+</div>
+                <div className="text-3xl font-bold mb-2">5+</div>
                 <div className="text-zinc-400">Projects</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold mb-2">2+</div>
+                <div className="text-3xl font-bold mb-2">1+</div>
                 <div className="text-zinc-400">Years Experience</div>
               </div>
               <div className="text-center">
@@ -495,7 +491,7 @@ export default function Home() {
                   </div>
                   <div>
                     <div className="font-semibold">Email</div>
-                    <div className="text-zinc-400">your-email@example.com</div>
+                    <div className="text-zinc-400">1910singhaditya007@gmail.com</div>
                   </div>
                 </div>
                 
@@ -505,7 +501,7 @@ export default function Home() {
                   </div>
                   <div>
                     <div className="font-semibold">Phone</div>
-                    <div className="text-zinc-400">+1 (555) 123-4567</div>
+                    <div className="text-zinc-400">+91 9696581412</div>
                   </div>
                 </div>
                 
@@ -515,7 +511,7 @@ export default function Home() {
                   </div>
                   <div>
                     <div className="font-semibold">Location</div>
-                    <div className="text-zinc-400">Your City, Country</div>
+                    <div className="text-zinc-400">Lucknow, India</div>
                   </div>
                 </div>
               </div>
@@ -523,11 +519,11 @@ export default function Home() {
               {/* CUSTOMIZE YOUR SOCIAL MEDIA LINKS HERE */}
               <div className="flex space-x-4 mt-8">
                 <Button variant="ghost" size="icon" className="bg-zinc-800 hover:bg-white hover:text-black rounded-lg"
-                  onClick={() => window.open('https://github.com/yourusername', '_blank')}>
+                  onClick={() => window.open('https://github.com/ASyngh', '_blank')}>
                   <Github className="h-6 w-6" />
                 </Button>
                 <Button variant="ghost" size="icon" className="bg-zinc-800 hover:bg-white hover:text-black rounded-lg"
-                  onClick={() => window.open('https://linkedin.com/in/yourusername', '_blank')}>
+                  onClick={() => window.open('https://www.linkedin.com/in/aditya-singh-2820a024a/', '_blank')}>
                   <Linkedin className="h-6 w-6" />
                 </Button>
                 <Button variant="ghost" size="icon" className="bg-zinc-800 hover:bg-white hover:text-black rounded-lg"
@@ -564,20 +560,7 @@ export default function Home() {
                     required
                   />
                 </div>
-                
-                <div className="mb-6">
-                  <Label htmlFor="subject" className="block text-sm font-semibold mb-2">Subject</Label>
-                  <Input
-                    id="subject"
-                    type="text"
-                    value={formData.subject}
-                    onChange={(e) => handleInputChange("subject", e.target.value)}
-                    className="bg-black border-zinc-700 text-white focus:border-white"
-                    placeholder="Project Discussion"
-                    required
-                  />
-                </div>
-                
+
                 <div className="mb-6">
                   <Label htmlFor="message" className="block text-sm font-semibold mb-2">Message</Label>
                   <Textarea
